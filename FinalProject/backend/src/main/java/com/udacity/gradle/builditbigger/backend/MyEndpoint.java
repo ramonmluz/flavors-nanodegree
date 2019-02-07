@@ -8,7 +8,9 @@ import javax.inject.Named;
 
 import library.java.create.udacity.joke.Joke;
 
-/** An endpoint class we are exposing */
+/**
+ * An endpoint class we are exposing
+ */
 @Api(
         name = "myApi",
         version = "v1",
@@ -20,11 +22,18 @@ import library.java.create.udacity.joke.Joke;
 )
 public class MyEndpoint {
 
-/** A simple endpoint method that takes a name and says Hi back */
+    /**
+     * A simple endpoint method that takes a name and says Hi back
+     */
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
-        response.setData("Bem vindo(a) a nossa biblieteca de piadas " + name + "\n" + new Joke().getJoke());
-        return response;
+
+        if (name != null && !name.isEmpty()) {
+            response.setData("Bem vindo(a) a nossa biblieteca de piadas " + name + "\n" + new Joke().getJoke());
+            return response;
+        }
+
+        return null;
     }
 }
